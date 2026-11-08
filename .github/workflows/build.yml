@@ -21,12 +21,12 @@ jobs:
 
       - name: Prepare chip files
         run: |
-          mkdir -p dist
-          cp dist/chip.wasm dist/mq8.chip.wasm
-          cp mq8.chip.json dist/mq8.chip.json
+          cp dist/chip.wasm mq8.chip.wasm
 
       - name: Upload compiled chip
         uses: actions/upload-artifact@v4
         with:
           name: mq8-custom-chip
-          path: dist/mq8.chip.*
+          path: |
+            mq8.chip.wasm
+            mq8.chip.json
