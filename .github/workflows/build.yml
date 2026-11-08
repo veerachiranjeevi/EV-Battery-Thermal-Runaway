@@ -1,0 +1,32 @@
+
+name: Build MQ-8 Custom Chip
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Compile MQ-8 chip
+        uses: wokwi/wokwi-chip-clang-action@main
+        with:
+          sources: "mq8.chip.c"
+
+      - name: Prepare chip files
+        run: |
+          mkdir -p dist
+          cp dist/chip.wasm dist/mq8.chip.wasm
+          cp mq8.chip.json dist/mq8.chip.json
+
+      - name: Upload compiled chip
+        uses: actions/upload-artifact@v4
+        with:
+          name: mq8-custom-chip
+          path: dist/mq8.chip.*
