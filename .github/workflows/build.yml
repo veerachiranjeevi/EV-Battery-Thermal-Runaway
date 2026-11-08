@@ -1,5 +1,5 @@
 
-name: Build MQ-8 Custom Chip
+name: Build Wokwi Custom Chips
 
 on:
   push:
@@ -8,25 +8,34 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Compile MQ-8 chip
+      - name: Build MQ-8 chip
         uses: wokwi/wokwi-chip-clang-action@main
         with:
           sources: "mq8.chip.c"
 
-      - name: Prepare chip files
-        run: |
-          cp dist/chip.wasm mq8.chip.wasm
+      - name: Save MQ-8 WASM
+        run: cp dist/chip.wasm mq8.chip.wasm
 
-      - name: Upload compiled chip
+      - name: Build INA219 chip
+        uses: wokwi/wokwi-chip-clang-action@main
+        with:
+          sources: "ina219.chip.c"
+
+      - name: Save INA219 WASM
+        run: cp dist/chip.wasm ina219.chip.wasm
+
+      - name: Upload custom chip files
         uses: actions/upload-artifact@v4
         with:
-          name: mq8-custom-chip
+          name: ev-battery-custom-chips
           path: |
             mq8.chip.wasm
             mq8.chip.json
+            ina219.chip.wasm
+            ina219.chip.json
