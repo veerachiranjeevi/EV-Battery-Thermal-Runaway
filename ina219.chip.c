@@ -62,6 +62,8 @@ void on_i2c_disconnect(void *user_data) {
 }
 
 void chip_init() {
+  printf("INA219 simulation started\n");
+  
   chip_state_t *chip = malloc(sizeof(chip_state_t));
 
   chip->voltage_attr = attr_init_float("voltage", 3.7);
@@ -83,5 +85,5 @@ void chip_init() {
 
   i2c_init(&i2c_config);
 
-  printf("INA219 simulation started\n");
+  
 }
