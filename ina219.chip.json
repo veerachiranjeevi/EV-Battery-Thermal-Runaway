@@ -1,0 +1,23 @@
+{
+  "name": "INA219 Voltage and Current Sensor",
+  "author": "Veera Chiranjeevi",
+  "pins": ["VCC", "GND", "SDA", "SCL"],
+  "controls": [
+    {
+      "id": "voltage",
+      "label": "Bus Voltage (V)",
+      "type": "range",
+      "min": 0,
+      "max": 5,
+      "step": 0.1
+    },
+    {
+      "id": "current",
+      "label": "Current (mA)",
+      "type": "range",
+      "min": 0,
+      "max": 2000,
+      "step": 10
+    }
+  ]
+}
